@@ -1,5 +1,7 @@
 package me.xnuminousx.korra.cosmicblast;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -92,7 +94,7 @@ public class CosmicBlast extends AvatarAbility implements AddonAbility {
 	            double z = 0.3D * (Math.PI * 4 - t) * Math.sin(t + phi);
 	            loc.add(x, y, z);
 				ParticleEffect.PORTAL.display(loc, 5, 0, 0, 0, 0.1F);
-				ParticleEffect.SPELL_MOB_AMBIENT.display(loc, 2, 0, 0, 0, 0.02F);
+				ParticleEffect.SPELL_MOB_AMBIENT.display(loc, 2, 0, 0, 0, 0.02F, Color.PURPLE);
 				ParticleEffect.END_ROD.display(loc, 2, 0, 0, 0, 0);
 				ParticleEffect.CRIT_MAGIC.display(loc, 5, 0, 0, 0, 0);
 				loc.subtract(x, y, z);
@@ -116,8 +118,8 @@ public class CosmicBlast extends AvatarAbility implements AddonAbility {
 				}
 				if (doPotEffects) {
 					LivingEntity le = (LivingEntity)e;
-					le.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 200, 1), true);
-					le.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 1), true);
+					le.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 200, 1));
+					le.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 200, 1));
 					
 				}
 				remove();
@@ -192,9 +194,9 @@ public class CosmicBlast extends AvatarAbility implements AddonAbility {
 
 	@Override
 	public void stop() {
-		ProjectKorra.plugin.getServer().getPluginManager().removePermission(this.perm);
+		Bukkit.getServer().getPluginManager().removePermission(this.perm);
 		super.remove();
-		ProjectKorra.plugin.getServer().getLogger().info(getName() + "disabled.");
+		ProjectKorra.plugin.getLogger().info(getName() + "disabled.");
 	}
 
 }
